@@ -18,6 +18,10 @@ goal(state(0, 0, _, 3, 3)).
 % Move from left to right
 move(state(ML, CL, left, MR, CR), state(ML2, CL2, right, MR2, CR2)) :-
     member(M, [0,1,2]), member(C, [0,1,2]),
+    %The member predicate is used to iterate through the possible numbers of missionaries (M) and 
+    %cannibals (C) that can be moved by the boat in each turn. The list [0,1,2] represents the 
+    %allowed numbers of individuals (either 0, 1, or 2, though in practice the boat cannot move 
+    %empty, so 0 is effectively excluded by other constraints). Obtained in a conversation with ChatGPT by OpenAI  (February 2nd, 2024).
     M + C =< 2, M + C > 0, % Boat capacity and non-empty condition
     ML >= M, CL >= C, % Ensure no negative results
     ML2 is ML - M, CL2 is CL - C, % Update left bank
